@@ -1,6 +1,6 @@
 name: fb_accountkit_flutter
-description: Facebook Account Kit Plugin for Flutter
-version: 0.0.1
+description: A Facebook Account Kit Plugin for Flutter. Helping sms authentication for mobile phone, easy to integration and use.
+version: 1.0.0
 author: Nghia Tran <nghia.tsy@gmail.com>
 homepage: https://github.com/nghiashiyi
 
@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^0.12.0+2
 
 dev_dependencies:
   flutter_test:

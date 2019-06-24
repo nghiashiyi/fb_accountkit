@@ -44,15 +44,20 @@ class _MyAppState extends State<MyApp> {
     Result result;
 
     try {
-      // required
-      FbAccountkitFlutter.defaultCountryCode = "VN";
-      FbAccountkitFlutter.codeIso = "84";
-      FbAccountkitFlutter.countryCode = "VNM";
 
-      // optional
-      FbAccountkitFlutter.phone = "0932051902";
+      FbAccountkitFlutter.defaultCountryCode = "[YOUR DEFAULT COUNTRY CODE]"; // Ex:  US, AL etc.
+      // Find more here : https://developers.facebook.com/docs/accountkit/countrycodes/
 
-      // request open accountkit
+      FbAccountkitFlutter.codeIso = "[YOUR ISO CODE]"; // Ex: 93, 355 etc.
+      // Find Dialing Code here : https://developers.facebook.com/docs/accountkit/countrycodes/
+
+      FbAccountkitFlutter.countryCode = "[YOUR COUNTRY CODE]";
+      // Find A 3 in here : http://kirste.userpage.fu-berlin.de/diverse/doc/ISO_3166.html
+
+      // Optional
+      FbAccountkitFlutter.phone = "[INITIAL PHONE]";
+
+      // Request open accountkit
       result = await FbAccountkitFlutter.startAuthentication();
 
     } on PlatformException catch(e) {

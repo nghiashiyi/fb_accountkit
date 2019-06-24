@@ -21,69 +21,62 @@ class FbAccountkitFlutter {
     Result result = Result();
     Map<String, dynamic> argument = Map();
 
-    if (defaultCountryCode == null) {
-      result.status = FAILED;
-      result.message = "Default Country Code can not be null";
+    if (_defaultCountryCode == null) {
+      result._status = FAILED;
+      result._message = "Default Country Code can not be null";
       return result;
     }
-    argument[_defaultCountryCodeArg] = defaultCountryCode;
+    argument[_defaultCountryCodeArg] = _defaultCountryCode;
 
-    if (codeIso == null) {
-      result.status = FAILED;
-      result.message = "Code ISO can not be null";
+    if (_codeIso == null) {
+      result._status = FAILED;
+      result._message = "Code ISO can not be null";
       return result;
     }
-    argument[_countryCodeIsoArg] = codeIso;
+    argument[_countryCodeIsoArg] = _codeIso;
 
-    if (countryCode == null) {
-      result.status = FAILED;
-      result.message = "Country Code can not be null";
+    if (_countryCode == null) {
+      result._status = FAILED;
+      result._message = "Country Code can not be null";
       return result;
     }
-    argument[_countryCodeArg] = countryCode;
+    argument[_countryCodeArg] = _countryCode;
 
-    if (phone != null) {
-      argument[_phoneArg] = phone;
+    if (_phone != null) {
+      argument[_phoneArg] = _phone;
     }
 
     try {
-      final String accountResult = await _channel.invokeMethod(_methodName, argument);
+      final String accountResult = await _channel.invokeMethod(
+          _methodName, argument);
       if (accountResult == "1") {
-        result.status = FAILED;
-        result.message = "Facebook Authentication is Failed or Canceled";
+        result._status = FAILED;
+        result._message = "Facebook Authentication is Failed or Canceled";
         return result;
       }
       Result parsedAccountResult = Result.fromJson(accountResult);
-      parsedAccountResult.status = SUCCEED;
-      parsedAccountResult.message = "Phone Authentication Succeed !";
+      parsedAccountResult._status = SUCCEED;
+      parsedAccountResult._message = "Phone Authentication Succeed !";
       return parsedAccountResult;
     } on PlatformException catch (e) {
       print(e);
-      result.status = FAILED;
-      result.message = e.toString();
+      result._status = FAILED;
+      result._message = e.toString();
     }
     return result;
   }
-
-  static String get phone => _phone;
 
   static set phone(String value) {
     _phone = value;
   }
 
-  static String get defaultCountryCode => _defaultCountryCode;
-
   static set defaultCountryCode(String value) {
     _defaultCountryCode = value;
   }
 
-  static String get codeIso => _codeIso;
-
   static set codeIso(String value) {
     _codeIso = value;
   }
-
-  static String get countryCode => _countryCode;
 
   static set countryCode(String value) {
     _countryCode = value;
@@ -97,15 +90,13 @@ class Result {
   String _email;
   String _phone;
 
-  Result(){
-
-  }
+  Result();
 
   Result.fromJson(String jsonString) {
-    Map Json = json.decode(jsonString);
-    this._phone = Json["phone"];
-    this._email = Json["email"];
-    this._userId = Json["id"];
+    Map parsedJson = json.decode(jsonString);
+    this._phone = parsedJson["phone"];
+    this._email = parsedJson["email"];
+    this._userId = parsedJson["id"];
   }
 
   int get status => _status;
@@ -117,24 +108,4 @@ class Result {
   String get phone => _phone;
 
   String get email => _email;
-
-  set userId(String value) {
-    _userId = value;
-  }
-
-  set email(String value) {
-    _email = value;
-  }
-
-  set phone(String value) {
-    _phone = value;
-  }
-
-  set status(int value) {
-    _status = value;
-  }
-
-  set message(String value) {
-    _message = value;
-  }
 }
