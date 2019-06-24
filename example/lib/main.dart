@@ -18,17 +18,21 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Account Kit Flutter example app'),
+          backgroundColor: Colors.redAccent,
         ),
         body: Center(
           child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text('Result:  ${_loginResult.message}\n'),
-              FlatButton(
+              RaisedButton(
                   onPressed: () {
                     openFacebookActivity();
                   },
-                  child: Text("Open Account Kit Activity"))
+                  child: Text("Open Account Kit SMS Authenation")),
+              Text('Result:  ${_loginResult.message == null ? "Ready to Process" : _loginResult.message}\n'),
+              _getOptionalInformation()
             ],
           ),
         ),
@@ -41,12 +45,12 @@ class _MyAppState extends State<MyApp> {
 
     try {
       // required
-      FbAccountkitFlutter.defaultCountryCode = "YOUR_DEFAULT_COUNTRY_CODE";
-      FbAccountkitFlutter.codeIso = "YOUR_CODE_ISO";
-      FbAccountkitFlutter.countryCode = "YOUR_COUNTRY_CODE";
+      FbAccountkitFlutter.defaultCountryCode = "VN";
+      FbAccountkitFlutter.codeIso = "84";
+      FbAccountkitFlutter.countryCode = "VNM";
 
       // optional
-      FbAccountkitFlutter.phone = "YOUR_INITIAL_PHONE";
+      FbAccountkitFlutter.phone = "0932051902";
 
       // request open accountkit
       result = await FbAccountkitFlutter.startAuthentication();
@@ -59,5 +63,15 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _loginResult = result;
     });
+  }
+
+  Widget _getOptionalInformation() {
+    var phone = _loginResult.phone == null ? "Phone Null" : _loginResult.phone;
+    var email = _loginResult.email == null ? "Email Null" : _loginResult.email;
+    var userId = _loginResult.userId == null ? "User Id Null" : _loginResult.userId;
+    if (_loginResult.status == FbAccountkitFlutter.SUCCEED) {
+      return Text("Optional Info: \n Phone -> $phone \n Email -> $email \n UserId -> $userId");
+    }
+    return Container();
   }
 }

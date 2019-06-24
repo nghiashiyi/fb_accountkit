@@ -1,8 +1,8 @@
 name: fb_accountkit_flutter
 description: Facebook Account Kit Plugin for Flutter
 version: 0.0.1
-author:
-homepage:
+author: Nghia Tran <nghia.tsy@gmail.com>
+homepage: https://github.com/nghiashiyi
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

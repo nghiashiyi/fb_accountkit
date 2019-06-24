@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">Account Kit Flutter Example</string>
-    <string name="FACEBOOK_APP_ID" translatable="false">[FACEBOOK APP ID]</string>
-    <string name="ACCOUNT_KIT_CLIENT_TOKEN" translatable="false">[ACCOUNTKIT CLIENT TOKEN]</string>
+    <string name="FACEBOOK_APP_ID" translatable="false">[YOUR_FACEBOOK_APP_ID]</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN" translatable="false">[ACCOUNT_KIT_CLIENT_TOKEN]</string>
 </resources>
